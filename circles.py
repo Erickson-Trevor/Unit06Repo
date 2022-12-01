@@ -14,11 +14,11 @@ def draw_circle(radius,extent):
     turtle.penup()
 
 def recurse_circle(radius,recursion_depth,x,y):
-    i = recursion_depth-2
+    i = recursion_depth-1
     j = 0
     k = 0
     while k<pow(4,recursion_depth-1):
-        while j < 4:
+        while j < 4 and k<pow(4,recursion_depth-1):
             if i == recursion_depth-1:
                 draw_circle(radius/pow(2,i),360)
                 j+=1
@@ -29,6 +29,32 @@ def recurse_circle(radius,recursion_depth,x,y):
                 i+=1
         j=0
         i-=1
+        while i == 0:
+            draw_circle(radius/pow(2,i+1),90)
+            i+=1
+        i = recursion_depth-1
+
+def recurse_circle2(radius,recursion_depth):
+    i = []
+    while len(i)<recursion_depth:
+        i.append(0)
+    j = recursion_depth-1
+    while i[0]<1:
+        while i[j]<4:
+            draw_circle(radius/pow(2,j),360)
+            i[j]+=1
+            if i[0]==1:
+                break
+            j-=1
+            draw_circle(radius/pow(2,j),90)
+            j+=1
+        i[j]=0
+        j-=1
+        i[j]+=1
+            
+
+            
+
     #if turtle.ycor() != y-radius:
         #draw_circle(radius/pow(2,i),90)
 
@@ -36,10 +62,11 @@ def main():
     starting_x = 0
     starting_y = 0
     radius = 300
-    recursion_depth = 1
+    recursion_depth = 3
     initalize(radius,0,0)
     # draw_circle(radius,2,0,0,0,0)
-    recurse_circle(radius,recursion_depth,starting_x,starting_y)
+    # recurse_circle(radius,recursion_depth,starting_x,starting_y)
+    recurse_circle2(radius,recursion_depth)
     input('Type to end program: ')
 
 main()
