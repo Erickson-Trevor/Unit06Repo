@@ -51,22 +51,36 @@ def recurse_circle2(radius,recursion_depth):
         i[j]=0
         j-=1
         i[j]+=1
-            
-
-            
-
     #if turtle.ycor() != y-radius:
         #draw_circle(radius/pow(2,i),90)
+
+def recurse_circle3(radius,recursion_max,recursion_depth):
+    r = recursion_depth
+    i = 0
+    if recursion_max == 0:
+        draw_circle(radius,360)
+        return 0
+    while i < 4:
+        if r < recursion_max:
+            r+=1
+            recurse_circle3(radius,recursion_max,r)
+            r-=1
+        draw_circle(radius/pow(2,r),360)
+        draw_circle(radius/pow(2,r-1),90)
+        i+=1
+    
+        
 
 def main():
     starting_x = 0
     starting_y = 0
     radius = 300
-    recursion_depth = 3
+    recursion_max = 4
     initalize(radius,0,0)
     # draw_circle(radius,2,0,0,0,0)
-    # recurse_circle(radius,recursion_depth,starting_x,starting_y)
-    recurse_circle2(radius,recursion_depth)
+    # recurse_circle(radius,recursion_max,starting_x,starting_y)
+    # recurse_circle2(radius,recursion_max)
+    recurse_circle3(radius,recursion_max,1)
     input('Type to end program: ')
 
 main()
